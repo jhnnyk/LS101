@@ -24,11 +24,8 @@ prompt("Welcome to Calculator! Enter your name:")
 name = ''
 loop do
   name = gets.chomp
-  if name.empty?
-    puts "Make sure to use a valid name."
-  else
-    break
-  end
+  break unless name.empty?
+  puts "Make sure to use a valid name."
 end
 
 prompt("Hi #{name}!")
@@ -39,11 +36,8 @@ loop do # main loop
     prompt("Please enter the first number:")
     number1 = gets.chomp
 
-    if valid_number?(number1)
-      break
-    else
-      prompt("Hmm... that doesn't look like a valid number.")
-    end
+    break if valid_number?(number1)
+    prompt("Hmm... that doesn't look like a valid number.")
   end
 
   number2 = ''
@@ -51,11 +45,8 @@ loop do # main loop
     prompt("Please enter the second number:")
     number2 = gets.chomp
 
-    if valid_number?(number2)
-      break
-    else
-      prompt("Hmm... that doesn't look like a valid number.")
-    end
+    break if valid_number?(number2)
+    prompt("Hmm... that doesn't look like a valid number.")
   end
 
   operator_prompt = <<-MSG
@@ -72,25 +63,22 @@ loop do # main loop
   loop do
     operator = gets.chomp
 
-    if %w(1 2 3 4).include?(operator)
-      break
-    else
-      prompt("Must choose 1, 2, 3 or 4")
-    end
+    break if %w(1 2 3 4).include?(operator)
+    prompt("Must choose 1, 2, 3 or 4")
   end
 
   prompt("#{operation_to_message(operator)} the two numbers...")
 
   result = case operator
            when '1'
-            number1.to_i + number2.to_i
+             number1.to_i + number2.to_i
            when '2'
-            number1.to_i - number2.to_i
+             number1.to_i - number2.to_i
            when '3'
-            number1.to_i * number2.to_i
+             number1.to_i * number2.to_i
            when '4'
-            number1.to_f / number2.to_f
-  end
+             number1.to_f / number2.to_f
+           end
 
   prompt("The result is #{result}.")
 
