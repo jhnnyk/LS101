@@ -1,0 +1,26 @@
+en:
+  welcome: "Welcome to Calculator! Please enter your name:"
+  valid_name: "Make sure to enter a valid name."
+  first_num: "Please enter the first number:"
+  second_num: "Please enter the second number:"
+  not_valid_num: "Hmm... that doesn't look like a valid number."
+  operation: |
+    "What operation would you like to perform?
+    1) add
+    2) subtract
+    3) multiply
+    4) divide"
+  valid_operation: "Must choose 1, 2, 3 or 4"
+es:
+  welcome: "Bienvenido a la calculadora ! Por favor, escriba su nombre:"
+  valid_name: "Asegúrese de introducir un nombre válido."
+  first_num: "Por favor, introduzca el primer número:"
+  second_num: "Por favor, introduzca el segundo número:"
+  not_valid_num: "Hmm ... que no se ve como un número válido."
+  operation: |
+    "Qué operación desea realizar ?
+    1 ) añadir
+    2 ) de resta
+    3 ) multiplicar
+    4 ) se dividen"
+  valid_operation: "Debe elegir 1 , 2 , 3 o 4"

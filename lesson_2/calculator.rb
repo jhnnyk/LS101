@@ -1,4 +1,14 @@
-def prompt(message)
+LANGUAGE = 'en'
+
+require 'yaml'
+MESSAGES = YAML.load_file('calculator_messages.yml')
+
+def messages(message, lang='en')
+  MESSAGES[lang][message]
+end
+
+def prompt(key)
+  message = messages(key, LANGUAGE)
   puts "=> #{message}"
 end
 
@@ -6,8 +16,20 @@ def valid_number?(num)
   num.to_i != 0
 end
 
+def number?(input)
+  integer?(input) || float?(input)
+end
+
+def integer?(input)
+  input.to_i.to_s == input
+end
+
+def float?(input)
+  input.to_f.to_s == input
+end
+
 def operation_to_message(op)
-  case op
+  word = case op
   when '1'
     'Adding'
   when '2'
@@ -17,57 +39,53 @@ def operation_to_message(op)
   when '4'
     'Dividing'
   end
+
+  x = "a random line of code"
+
+  word # since this is the last line, this method will always return this value
 end
 
-prompt("Welcome to Calculator! Enter your name:")
+prompt('welcome')
 
 name = ''
 loop do
   name = gets.chomp
   break unless name.empty?
-  puts "Make sure to use a valid name."
+  prompt('valid_name')
 end
 
-prompt("Hi #{name}!")
+puts "=> Hi #{name}!"
 
 loop do # main loop
   number1 = ''
   loop do
-    prompt("Please enter the first number:")
+    prompt('first_num')
     number1 = gets.chomp
 
-    break if valid_number?(number1)
-    prompt("Hmm... that doesn't look like a valid number.")
+    break if number?(number1)
+    prompt('not_valid_num')
   end
 
   number2 = ''
   loop do
-    prompt("Please enter the second number:")
+    prompt('second_num')
     number2 = gets.chomp
 
-    break if valid_number?(number2)
-    prompt("Hmm... that doesn't look like a valid number.")
+    break if number?(number2)
+    prompt('not_valid_num')
   end
 
-  operator_prompt = <<-MSG
-    What operation would you like to perform?
-    1) add
-    2) subtract
-    3) multiply
-    4) divide
-  MSG
-
-  prompt(operator_prompt)
+  prompt('operation')
 
   operator = ''
   loop do
     operator = gets.chomp
 
     break if %w(1 2 3 4).include?(operator)
-    prompt("Must choose 1, 2, 3 or 4")
+    prompt('valid_operation')
   end
 
-  prompt("#{operation_to_message(operator)} the two numbers...")
+  puts "#{operation_to_message(operator)} the two numbers..."
 
   result = case operator
            when '1'
@@ -80,9 +98,9 @@ loop do # main loop
              number1.to_f / number2.to_f
            end
 
-  prompt("The result is #{result}.")
+  puts "The result is #{result}."
 
-  prompt("Do you want to perform another calculation? (Y to calculate again)")
+  puts "Do you want to perform another calculation? (Y to calculate again)"
   answer = gets.chomp
   break unless answer.downcase.start_with?('y')
 end
