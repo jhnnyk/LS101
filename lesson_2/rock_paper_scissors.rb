@@ -22,11 +22,28 @@ def display_results(player, computer)
   end
 end
 
+def match_abbreviation(abbr)
+  case abbr
+  when 'r'
+    'rock'
+  when 'p'
+    'paper'
+  when 'sc'
+    'scissors'
+  when 'sp'
+    'spock'
+  when 'l'
+    'lizard'
+  end
+end
+
 loop do
   choice = ''
   loop do
     prompt "Choose one: #{VALID_CHOICES.join(', ')}"
-    choice = gets.chomp.downcase
+    prompt "Abbreviate by using r, p, sc, sp, & l"
+    user_choice = gets.chomp.downcase
+    choice = match_abbreviation(user_choice)
 
     break if VALID_CHOICES.include?(choice)
     prompt "That's not a valid choice."
