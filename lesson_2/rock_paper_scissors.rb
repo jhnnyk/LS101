@@ -1,13 +1,15 @@
-VALID_CHOICES = %w(rock paper scissors).freeze
+VALID_CHOICES = %w(rock paper scissors spock lizard).freeze
 
 def prompt(message)
   puts "=> #{message}"
 end
 
 def win?(first, second)
-  (first == 'rock' && second == 'scissors') ||
-    (first == 'paper' && second == 'rock') ||
-    (first == 'scissors' && second == 'paper')
+  (first == 'rock' && (second == 'scissors' || second == 'lizard')) ||
+    (first == 'paper' && (second == 'rock' || second == 'spock')) ||
+    (first == 'scissors' && (second == 'paper' || second == 'lizard')) ||
+    (first == 'lizard' && (second == 'paper' || second == 'spock')) ||
+    (first == 'spock' && (second == 'rock' || second == 'scissors'))
 end
 
 def display_results(player, computer)
