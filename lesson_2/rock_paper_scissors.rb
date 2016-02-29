@@ -38,22 +38,44 @@ def match_abbreviation(abbr)
 end
 
 loop do
-  choice = ''
-  loop do
-    prompt "Choose one: #{VALID_CHOICES.join(', ')}"
-    prompt "Abbreviate by using r, p, sc, sp, & l"
-    user_choice = gets.chomp.downcase
-    choice = match_abbreviation(user_choice)
+  player_score = 0
+  computer_score = 0
+  prompt "Welcome to Rock, Paper, Scissors, Spock, Lizard!"
+  prompt "First one to 5 wins!"
+  while player_score < 5 && computer_score < 5
+    choice = ''
+    loop do
+      prompt "Choose one: #{VALID_CHOICES.join(', ')}"
+      prompt "Abbreviate by using r, p, sc, sp, & l"
+      user_choice = gets.chomp.downcase
+      choice = match_abbreviation(user_choice)
 
-    break if VALID_CHOICES.include?(choice)
-    prompt "That's not a valid choice."
+      break if VALID_CHOICES.include?(choice)
+      prompt "That's not a valid choice."
+    end
+
+    computer_choice = VALID_CHOICES.sample
+
+    prompt "You chose: #{choice}; Computer chose: #{computer_choice}."
+
+    display_results(choice, computer_choice)
+
+    if win?(choice, computer_choice)
+      player_score += 1
+    elsif win?(computer_choice, choice)
+      computer_score += 1
+    end
+
+    prompt "Player: #{player_score}, Computer: #{computer_score}"
   end
 
-  computer_choice = VALID_CHOICES.sample
-
-  prompt "You chose: #{choice}; Computer chose: #{computer_choice}."
-
-  display_results(choice, computer_choice)
+  puts "----------"
+  if player_score == 5
+    prompt "You win the game #{player_score}-#{computer_score}!"
+  else
+    prompt "The computer wins #{computer_score}-#{player_score}"
+  end
+  puts "----------"
 
   prompt "Do you want to play again? (Y or N)"
   answer = gets.chomp
