@@ -19,6 +19,7 @@ end
 # rubocop:disable Metrics/AbcSize
 def display_board(brd)
   system 'clear'
+  puts "First to 5 wins!"
   puts "You're a #{PLAYER_MARKER}. Computer is #{COMPUTER_MARKER}."
   puts ""
   puts "     |     |"
@@ -102,6 +103,17 @@ def detect_winner(brd)
   nil
 end
 
+def keep_score(winner, score)
+  if winner == 'Player'
+    score[0] += 1
+  else
+    score[1] += 1
+  end
+  score
+end
+
+score = [0, 0]
+
 loop do
   board = initialize_board
 
@@ -118,9 +130,12 @@ loop do
 
   if someone_won?(board)
     prompt "#{detect_winner(board)} won!"
+    keep_score(detect_winner(board), score)
   else
     prompt "It's a tie!"
   end
+
+  prompt "Player: #{score[0]}, Computer: #{score[1]}"
 
   prompt "Play again? (y or n)"
   answer = gets.chomp
