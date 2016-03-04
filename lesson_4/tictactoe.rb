@@ -105,14 +105,14 @@ end
 
 def keep_score(winner, score)
   if winner == 'Player'
-    score[0] += 1
+    score[:player] += 1
   else
-    score[1] += 1
+    score[:computer] += 1
   end
   score
 end
 
-score = [0, 0]
+score = {player: 0, computer: 0}
 
 loop do
   board = initialize_board
@@ -129,13 +129,13 @@ loop do
   display_board(board)
 
   if someone_won?(board)
-    prompt "#{detect_winner(board)} won!"
+    prompt "#{detect_winner(board)} gets a point!"
     keep_score(detect_winner(board), score)
   else
     prompt "It's a tie!"
   end
 
-  prompt "Player: #{score[0]}, Computer: #{score[1]}"
+  prompt "Player: #{score[:player]}, Computer: #{score[:computer]}"
 
   prompt "Play again? (y or n)"
   answer = gets.chomp
