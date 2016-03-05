@@ -112,30 +112,42 @@ def keep_score(winner, score)
   score
 end
 
-score = {player: 0, computer: 0}
-
 loop do
-  board = initialize_board
+  score = {player: 0, computer: 0}
 
-  loop do
+  while (score[:player] < 5 && score[:computer] < 5)
+    board = initialize_board
+
+    loop do
+      display_board(board)
+      player_places_piece!(board)
+      break if someone_won?(board) || board_full?(board)
+
+      computer_places_piece!(board)
+      break if someone_won?(board) || board_full?(board)
+    end
+
     display_board(board)
-    player_places_piece!(board)
-    break if someone_won?(board) || board_full?(board)
 
-    computer_places_piece!(board)
-    break if someone_won?(board) || board_full?(board)
+    if someone_won?(board)
+      prompt "#{detect_winner(board)} gets a point!"
+      keep_score(detect_winner(board), score)
+    else
+      prompt "It's a tie!"
+    end
+
+    prompt "Player: #{score[:player]}, Computer: #{score[:computer]}"
+
+    if (score[:player] < 5 && score[:computer] < 5)
+      prompt "Continue? (y or n)"
+      answer = gets.chomp
+      break unless answer.downcase.start_with?('y')
+    elsif score[:player] == 5
+      prompt "Player wins!"
+    else
+      prompt "Computer wins :-("
+    end
   end
-
-  display_board(board)
-
-  if someone_won?(board)
-    prompt "#{detect_winner(board)} gets a point!"
-    keep_score(detect_winner(board), score)
-  else
-    prompt "It's a tie!"
-  end
-
-  prompt "Player: #{score[:player]}, Computer: #{score[:computer]}"
 
   prompt "Play again? (y or n)"
   answer = gets.chomp
