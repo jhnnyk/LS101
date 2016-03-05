@@ -16,7 +16,7 @@ def joinor(array, delimeter=', ', word='or')
   array.join(delimeter)
 end
 
-# rubocop:disable Metrics/AbcSize
+# rubocop:disable Metrics/MethodLength, Metrics/AbcSize
 def display_board(brd)
   system 'clear'
   puts "First to 5 wins!"
@@ -35,7 +35,7 @@ def display_board(brd)
   puts "     |     |"
   puts ""
 end
-# rubocop:enable Metrics/AbcSize
+# rubocop:enable Metrics/MethodLength, Metrics/AbcSize
 
 def initialize_board
   new_board = {}
@@ -49,9 +49,7 @@ end
 
 def find_at_risk_square(line, brd)
   if brd.values_at(*line).count(PLAYER_MARKER) == 2
-    brd.select{ |k, v| line.include?(k) && v == INITIAL_MARKER}.keys.first
-  else
-    nil
+    brd.select { |k, v| line.include?(k) && v == INITIAL_MARKER }.keys.first
   end
 end
 
@@ -130,9 +128,9 @@ def keep_score(winner, score)
 end
 
 loop do
-  score = {player: 0, computer: 0}
+  score = { player: 0, computer: 0 }
 
-  while (score[:player] < 5 && score[:computer] < 5)
+  while score[:player] < 5 && score[:computer] < 5
     board = initialize_board
 
     loop do
@@ -155,7 +153,7 @@ loop do
 
     prompt "Player: #{score[:player]}, Computer: #{score[:computer]}"
 
-    if (score[:player] < 5 && score[:computer] < 5)
+    if score[:player] < 5 && score[:computer] < 5
       prompt "Continue? (y or n)"
       answer = gets.chomp
       break unless answer.downcase.start_with?('y')
