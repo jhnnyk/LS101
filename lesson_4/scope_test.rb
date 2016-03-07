@@ -1,3 +1,31 @@
+# def amethod(param)
+#   param += " universe"  # the '+' method returns a NEW object!
+#   param + " universe"
+#   param << " world"
+# end
+
+# str = "hello"
+# amethod(str)
+
+# p str
+
+a = "hello"
+b = a
+# 2 variables pointing to 1 object
+b << " world"
+# any destructive action (like '<<') modifies the object,
+# but both variables are still just pointing at that 1 (same) object
+puts a
+puts b
+
+a = "hey" # now 'a' has been reassigned to a new object
+b << " universe"
+# so we have 2 variables & 2 objects
+puts a
+puts b
+
+# --------------------
+
 player_score = 5
 computer_score = 7
 
