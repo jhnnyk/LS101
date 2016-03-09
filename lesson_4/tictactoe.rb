@@ -143,8 +143,20 @@ def keep_score(winner, score)
   score
 end
 
+def get_current_player(choose)
+  if choose.start_with?("c")
+    current_player = "computer"
+  else
+    current_player = "player"
+  end
+  return current_player
+end
+
 loop do
   score = { player: 0, computer: 0 }
+  prompt "Who should go first, computer(c) or player(p)?"
+  choose = gets.chomp.downcase
+  current_player = get_current_player(choose)
 
   while score[:player] < 5 && score[:computer] < 5
     board = initialize_board
