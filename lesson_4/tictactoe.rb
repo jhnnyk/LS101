@@ -95,6 +95,14 @@ def computer_places_piece!(brd)
   brd[square] = COMPUTER_MARKER
 end
 
+def place_piece!(brd, player)
+  if player == "player"
+    player_places_piece!(brd)
+  else
+    computer_places_piece!(brd)
+  end
+end
+
 def board_full?(brd)
   empty_squares(brd) == []
 end
@@ -152,6 +160,15 @@ def get_current_player(choose)
   return current_player
 end
 
+def alternate_player(current_player)
+  if current_player == "player"
+    current_player = "computer"
+  else
+    current_player = "player"
+  end
+  return current_player
+end
+
 loop do
   score = { player: 0, computer: 0 }
   prompt "Who should go first, computer(c) or player(p)?"
@@ -163,10 +180,8 @@ loop do
 
     loop do
       display_board(board)
-      player_places_piece!(board)
-      break if someone_won?(board) || board_full?(board)
-
-      computer_places_piece!(board)
+      place_piece!(board, current_player)
+      current_player = alternate_player(current_player)
       break if someone_won?(board) || board_full?(board)
     end
 
