@@ -3,7 +3,7 @@ def prompt(msg)
 end
 
 def initialize_deck
-  deck = [
+  [
     ['H', '2'], ['H', '3'], ['H', '4'], ['H', '5'], ['H', '6'], ['H', '7'], ['H', '8'],
     ['H', '9'], ['H', '10'], ['H', 'J'], ['H', 'Q'], ['H', 'K'], ['H', 'A'],
     ['D', '2'], ['D', '3'], ['D', '4'], ['D', '5'], ['D', '6'], ['D', '7'], ['D', '8'],
@@ -16,36 +16,36 @@ def initialize_deck
 end
 
 def say(card)
-  case 
-  when card[0] == 'H'
-    card_suit = 'Hearts'
-  when card[0] == 'D'
-    card_suit = 'Diamonds'
-  when card[0] == 'C'
-    card_suit = 'Clubs'
-  when card[0] == 'S'
-    card_suit = 'Spades'
-  end
+  card_suit = case card[0]
+              when 'H'
+                'Hearts'
+              when 'D'
+                'Diamonds'
+              when 'C'
+                'Clubs'
+              when 'S'
+                'Spades'
+              end
 
-  case 
-  when card[1] == 'A'
-    card_value = 'Ace'
-  when card[1] == 'K'
-    card_value = 'King'
-  when card[1] == 'Q'
-    card_value = 'Queen'
-  when card[1] == 'J'
-    card_value = 'Jack'
-  else
-    card_value = card[1]
-  end
+  card_value = case card[1]
+               when 'A'
+                 'Ace'
+               when 'K'
+                 'King'
+               when 'Q'
+                 'Queen'
+               when 'J'
+                 'Jack'
+               else
+                 card[1]
+               end
 
   "#{card_value} of #{card_suit}"
 end
 
 def deal_card(deck)
   card = deck.sample
-  deck = deck.delete(card)
+  deck.delete(card)
 end
 
 def total(cards)
@@ -53,13 +53,13 @@ def total(cards)
 
   sum = 0
   values.each do |value|
-    if value == "A"
-      sum += 11
-    elsif value.to_i == 0 # J, Q, K
-      sum += 10
-    else
-      sum += value.to_i
-    end
+    sum += if value == "A"
+             11
+           elsif value.to_i == 0 # J, Q, K
+             10
+           else
+             value.to_i
+           end
   end
 
   # correct for Aces
@@ -136,7 +136,7 @@ loop do
 
     prompt "You have #{total(player_cards)}; Dealer has #{total(dealer_cards)}."
     winner = find_winner(player_cards, dealer_cards)
-    prompt "#{display_winner(winner)}"
+    prompt display_winner(winner).to_s
   end
 
   prompt "Do you want to play again? (yes or no)"
