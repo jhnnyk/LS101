@@ -15,6 +15,34 @@ def initialize_deck
   ]
 end
 
+def say(card)
+  case 
+  when card[0] == 'H'
+    card_suit = 'Hearts'
+  when card[0] == 'D'
+    card_suit = 'Diamonds'
+  when card[0] == 'C'
+    card_suit = 'Clubs'
+  when card[0] == 'S'
+    card_suit = 'Spades'
+  end
+
+  case 
+  when card[1] == 'A'
+    card_value = 'Ace'
+  when card[1] == 'K'
+    card_value = 'King'
+  when card[1] == 'Q'
+    card_value = 'Queen'
+  when card[1] == 'J'
+    card_value = 'Jack'
+  else
+    card_value = card[1]
+  end
+
+  "#{card_value} of #{card_suit}"
+end
+
 def deal_card(deck)
   card = deck.sample
   deck = deck.delete(card)
@@ -42,15 +70,76 @@ def total(cards)
   sum
 end
 
-player_cards = []
-dealer_cards = []
-deck = initialize_deck
-dealer_cards << deal_card(deck) << deal_card(deck)
-player_cards << deal_card(deck) << deal_card(deck)
+def busted?(cards)
+  total(cards) > 21
+end
 
-p player_cards
-p total(player_cards)
-p dealer_cards
-p total(dealer_cards)
-p deck
+def find_winner(player_cards, dealer_cards)
+  if busted?(dealer_cards) || total(player_cards) > total(dealer_cards)
+    "Player"
+  elsif total(dealer_cards) > total(player_cards)
+    return "Dealer"
+  else
+    return "Tie"
+  end
+end
 
+def display_winner(winner)
+  if winner == "Player"
+    "Player wins!"
+  elsif winner == "Dealer"
+    "Dealer wins."
+  else
+    "It's a tie!"
+  end
+end
+
+loop do
+  player_cards = []
+  dealer_cards = []
+  deck = initialize_deck
+
+  prompt "Welcome to 21!"
+  prompt "Dealing cards..."
+  player_cards << deal_card(deck) << deal_card(deck)
+  dealer_cards << deal_card(deck) << deal_card(deck)
+
+  prompt "-------"
+  prompt "You have a #{say(player_cards[0])} & a #{say(player_cards[1])}"
+  prompt "for a total of #{total(player_cards)}."
+  prompt "-------"
+  prompt "Dealer is showing #{say(dealer_cards[0])}."
+  prompt "-------"
+
+  answer = nil
+  loop do
+    prompt "Do you want to hit or stay?"
+    answer = gets.chomp.downcase
+    if answer == 'hit'
+      player_cards << deal_card(deck)
+      prompt "You got a #{say(player_cards.last)}."
+      prompt "Your total is now #{total(player_cards)}."
+    end
+    break if answer == 'stay' || busted?(player_cards)
+  end
+
+  if busted?(player_cards)
+    prompt "You busted! Dealer wins."
+  else
+    prompt "You chose to stay!"
+
+    loop do
+      break if total(dealer_cards) >= 17
+      dealer_cards << deal_card(deck)
+      prompt "Dealer gets a #{say(dealer_cards.last)}"
+    end
+
+    prompt "You have #{total(player_cards)}; Dealer has #{total(dealer_cards)}."
+    winner = find_winner(player_cards, dealer_cards)
+    prompt "#{display_winner(winner)}"
+  end
+
+  prompt "Do you want to play again? (yes or no)"
+  answer = gets.chomp.downcase
+  break unless answer.start_with?("y")
+end
