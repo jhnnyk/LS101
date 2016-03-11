@@ -96,7 +96,6 @@ def play_again?
 end
 
 loop do
-
   prompt "Welcome to Twenty-One!"
   prompt "First to win 5 hands, wins the game!"
   score = { player: 0, dealer: 0 }
