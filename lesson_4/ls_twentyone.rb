@@ -132,12 +132,13 @@ loop do
     prompt "Dealer's cards are now: #{dealer_cards}"
   end
 
+  dealer_total = total(dealer_cards)
   if busted?(dealer_cards)
-    prompt "Dealer total is now: #{total(dealer_cards)}"
+    prompt "Dealer total is now: #{dealer_total}"
     display_result(dealer_cards, player_cards)
     play_again? ? next : break
   else
-    prompt "Dealer stays at #{total(dealer_cards)}"
+    prompt "Dealer stays at #{dealer_total}"
   end
 
   puts "==============="
