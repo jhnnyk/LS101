@@ -54,6 +54,11 @@ def detect_result(dealer_cards, player_cards)
 end
 
 def display_result(dealer_cards, player_cards)
+  puts "==============="
+  prompt "Dealer has #{dealer_cards}, for a total of: #{total(dealer_cards)}"
+  prompt "Player has #{player_cards}, for a total of: #{total(player_cards)}"
+  puts "==============="
+
   result = detect_result(dealer_cards, player_cards)
 
   case result
@@ -140,11 +145,6 @@ loop do
   else
     prompt "Dealer stays at #{dealer_total}"
   end
-
-  puts "==============="
-  prompt "Dealer has #{dealer_cards}, for a total of: #{total(dealer_cards)}"
-  prompt "Player has #{player_cards}, for a total of: #{total(player_cards)}"
-  puts "==============="
 
   display_result(dealer_cards, player_cards)
 
