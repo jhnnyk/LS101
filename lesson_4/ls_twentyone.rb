@@ -1,5 +1,5 @@
-SUITS = ['H', 'D', 'S', 'C']
-VALUES = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A']
+SUITS = ['H', 'D', 'S', 'C'].freeze
+VALUES = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'].freeze
 
 def prompt(msg)
   puts "=> #{msg}"
@@ -14,13 +14,13 @@ def total(cards)
 
   sum = 0
   values.each do |value|
-    if value == "A"
-      sum += 11
-    elsif value.to_i == 0
-      sum += 10
-    else
-      sum += value.to_i
-    end
+    sum += if value == "A"
+             11
+           elsif value.to_i == 0
+             10
+           else
+             value.to_i
+           end
   end
 
   # correct for Aces
@@ -39,7 +39,7 @@ end
 def detect_result(dealer_cards, player_cards)
   player_total = total(player_cards)
   dealer_total = total(dealer_cards)
-  
+
   if player_total > 21
     :player_busted
   elsif dealer_total > 21
