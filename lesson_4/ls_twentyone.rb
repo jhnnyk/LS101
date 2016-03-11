@@ -2,6 +2,8 @@ require 'pry'
 
 SUITS = ['H', 'D', 'S', 'C'].freeze
 VALUES = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'].freeze
+MAX_WIN = 31
+DEALER_HITS_UNTIL = 27
 
 def prompt(msg)
   puts "=> #{msg}"
@@ -27,14 +29,14 @@ def total(cards)
 
   # correct for Aces
   values.select { |value| value == "A" }.count.times do
-    sum -= 10 if sum > 21
+    sum -= 10 if sum > MAX_WIN
   end
 
   sum
 end
 
 def busted?(cards)
-  total(cards) > 21
+  total(cards) > MAX_WIN
 end
 
 # :tie, :dealer, :player, :dealer_busted, :player_busted
@@ -42,9 +44,9 @@ def detect_result(dealer_cards, player_cards)
   player_total = total(player_cards)
   dealer_total = total(dealer_cards)
 
-  if player_total > 21
+  if player_total > MAX_WIN
     :player_busted
-  elsif dealer_total > 21
+  elsif dealer_total > MAX_WIN
     :dealer_busted
   elsif dealer_total < player_total
     :player
@@ -152,7 +154,7 @@ loop do
     prompt "Dealer turn..."
 
     loop do
-      break if busted?(dealer_cards) || total(dealer_cards) >= 17
+      break if busted?(dealer_cards) || total(dealer_cards) >= DEALER_HITS_UNTIL
 
       prompt "Dealer hits!"
       dealer_cards << deck.pop
