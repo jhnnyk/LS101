@@ -1,0 +1,44 @@
+Local Variables
+  1. The block reassigned the value of str to 2. The puts method outputs this value on line 8. The underlying principle here is that blocks have access to outer scope local variables and can modify them.
+
+  2. Since str is initialized inside the block, it's scope is limited to the inside of the block. Therefore line 6 raises an exception since str is not available outside the block.
+
+  3. No, you cannot say with certainty whether or not the code will run. This is because without knowing the code above, we do not know whether line 4 is initialization or reassignment, so we don't know what the scope of str is until we debug the problem. Additionally there could also be a method named str. If there is a method named str, line 8 will output the return value of that method.
+
+  4. The code here raises an exception because methods generate their own scope. The local variable str needs to be passed into the method as a parameter or be initialized within the method.
+
+  5. Since method's define their own scope, line 4 creates a new object unrelated to the object initialized on line 1. That is, the str variable inside the method is a different object than the one outside the method. Line 7 can only reference the variable outside the method so it returns "hello".
+
+  6. In Ruby the '=' operator is assignment or reassignment. Line 3 reassigns the variable 'a' to a new string object with the value of "hi". 'b' remains pointed at the string object with the value of "hello". There for even though line 4 is calling a destructive method, it does not affect the object that 'b' is pointed at.
+
+  7. There are 4 variables and 2 objects in the code. The two objects are created on lines 1-2. Lines 4-7 are all just assignment or reassignment of 4 variables to those same two objects.
+
+Mutating Method Arguments
+  1. The code demonstrates that the '+' operator is not destructive. That is, it does not mutate the caller. So even though we pass in our local variable 'greeting' as a parameter, the method returns a new string. It does not mutate the object that is passed into the method. Therefore outside the method the local variable 'greeting' continues to point at the string object with the value of "hello".
+
+  2. This code demonstrates that the '<<' operator IS destructive. Here we pass in the string object "hello" via the method's parameter. The shovel operator '<<' permanently modifies that same string object so that it becomes "hello world". Then line 8 outputs that value.
+
+  3. Line 2 is reassignment. It's reassigning the value of 'param' to a NEW string object with the value of "hi". Then on line 3, even though the destructive method '<<' is called, it is mutating this new object within the method. This does not affect the string object outside the method. The variable 'greeting' continues to point at this original string object which still has the value "hello".
+
+  4. Again despite passing in the string object "hello" to the 'change' method, as soon as we hit line 2, a reassignment is made and a NEW object is created. The destructive method '<<' on line 3 mutates this new object and NOT the original one that we passed in as a parameter. Line 4 reassigns the variable 'param' to another new object which is then mutated on line 5, but again, since new objects are created, none of this affects the original string object which retains the value "hello".
+
+Working with Collections
+  1. The Array#map method returns a new array based on the return value of the block. Each element is transformed based on the block's return value.
+
+  2. The Array#select method returns a new array based on the return value of the block. Each element is selected based on the truthiness of the block's return value.
+
+  3. The Enumerable#reduce method combines the elements passed in by applying an method or block to the elements. A value is then returned from this combination.
+
+  4. Since Array#map transforms each element according to the block's return value, the code on line 1 adds 1 to each element thereby returning [2, 3, 4]. The block on line 3 does nearly the same thing except that it's also doing reassignment. n += 1 is the same as n = n + 1. In this case it would also return [2, 3, 4]. I would prefer the code on line 1 because it is more concise. Also since Array#map returns a new array anyway, I don't think there is any need for making a reassignment.
+
+  5. Array#map returns a new array based on the return value of the block. It transforms the array based on the blocks return value. Here n > 2 will return the boolean values true or false. Therefore here we would get:
+  `arr = [false, false, true]`
+
+  6. The block will output 1, 2, 3, but the method 'puts' returns nil. Since map transforms each element of the array based on the return value of the block, and 'puts' returns nil for each element, we would get:
+  `arr = [nil, nil, nil]`
+
+  7. The result of this code is:
+  `arr = [1, 2, 3]`
+  This is because Array#select evaluates the truthiness of the block for each element. Each element is then added to the new array based on this truthiness. Here n + 2 is always truthy so every element is added to the new array.
+
+  8. Here arr is an empty array. Again Array#select selects each element for a new array based on the truthiness of the return value of the block for each element. This person has added 'puts n' to the block. Despite outputting each element 'puts' always returns nil. nil is a falsey value, so for every element this block returns false. Therefore nothing is added to 'arr' and arr = [].
