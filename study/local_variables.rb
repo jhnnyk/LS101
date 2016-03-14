@@ -74,3 +74,24 @@
 # run(a)
 
 # puts a
+
+
+# -----------------
+# def my_method(a)
+#   a += " hello"
+#   puts a
+# end
+
+# a = "something else"
+
+# p my_method(a)
+# puts a
+
+
+# ----------------
+a = "hi there"
+b = a
+a += " not here"
+
+puts a
+puts b
