@@ -65,12 +65,12 @@
 # ---------------
 # method args
 
-def run(str)
-  str += ' world'
-  str << ' world'
-end
+# def run(str)
+#   str += ' world'
+#   str << ' world'
+# end
 
-a = "hello"
-run(a)
+# a = "hello"
+# run(a)
 
-puts a
+# puts a
