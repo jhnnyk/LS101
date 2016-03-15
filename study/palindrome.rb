@@ -1,5 +1,5 @@
 def is_palindrome?(word)
-  letters = word.downcase.split(//)
+  letters = word.downcase.split("")
 
   i = 0
   reverse_letters = []
