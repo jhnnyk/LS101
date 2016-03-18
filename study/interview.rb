@@ -1,45 +1,23 @@
-PRODUCTS = [
-  { name: "Thinkpad x210", price: 220 },
-  { name: "Thinkpad x220", price: 250 },
-  { name: "Thinkpad x250", price: 979 },
-  { name: "Thinkpad x230", price: 300 },
-  { name: "Thinkpad x230", price: 330 },
-  { name: "Thinkpad x230", price: 350 },
-  { name: "Thinkpad x240", price: 700 },
-  { name: "Macbook Leopard", price: 300 },
-  { name: "Macbook Air", price: 700 },
-  { name: "Macbook Pro", price: 600 },
-  { name: "Macbook", price: 1449 },
-  { name: "Dell Latitude", price: 200 },
-  { name: "Dell Latitude", price: 650 },
-  { name: "Dell Inspiron", price: 300 },
-  { name: "Dell Inspiron", price: 450 },
-]
+VOWELS = ['a', 'e', 'i', 'o', 'u']
 
-query = {
-  price_min: 240,
-  price_max: 280,
-  q: "thinkpad"
-}
-
-query2 = {
-  price_min: 300,
-  price_max: 450,
-  q: 'dell'
-}
-
-def search(query)
-  # implementation goes here
-  PRODUCTS.select do |product|
-    product[:price] >= query[:price_min] &&
-    product[:price] <= query[:price_max] &&
-    product[:name].downcase.include?(query[:q])
+def remove_vowels(str)
+  word_arr = str.split("")
+  VOWELS.each do |char|
+    word_arr.delete(char)
   end
+  no_vowels = word_arr.join("")
 end
 
-p search(query)
-# [ { name: "Thinkpad x220", price: 250 } ]
+def remove_vowels_arr(arr)
+  no_vowels_arr = []
+  
+  arr.each do |word|
+    no_vowels_arr << remove_vowels(word)
+  end
 
-p search(query2)
-# [{ name: "Dell Inspiron", price: 300 },
-#  { name: "Dell Inspiron", price: 450 }]
+  no_vowels_arr
+end
+
+arr = ['green', 'yellow', 'black', 'white']
+
+p remove_vowels_arr(arr)
