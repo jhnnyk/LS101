@@ -1,24 +1,17 @@
-def fibonacci(size)
-  fib = [0, 1]
+def reverse_word(str)
+  word_arr = str.split("")
+  rev_arr = []
 
-  loop do
-    fib[fib.size] = fib[fib.size - 1] + fib[fib.size - 2]
-    break if fib.size == size
+  str.size.times do
+    rev_arr << word_arr.pop
   end
-  fib
+
+  rev_word = rev_arr.join("")
 end
 
-def fib_elements(arr)
-  fib_arr = []
-  fib_nums = fibonacci(arr.size)
-
-  arr.each_with_index do |item, index|
-    fib_arr << item if fib_nums.include?(index)
-  end
-  
-  fib_arr
+def is_palindrome?(str)
+  str == reverse_word(str)
 end
 
-arr = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight']
-
-p fib_elements(arr)
+p reverse_word("racecar")
+p is_palindrome?("racecar")
