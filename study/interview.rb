@@ -1,17 +1,19 @@
-def reverse_word(str)
-  word_arr = str.split("")
-  rev_arr = []
+def fizzbuzz(num1, num2)
+  fb_arr = []
 
-  str.size.times do
-    rev_arr << word_arr.pop
+  (num1..num2).each do |num|
+    if num%15 == 0
+      fb_arr << "FizzBuzz"
+    elsif num%5 == 0
+      fb_arr << "Buzz"
+    elsif num%3 == 0
+      fb_arr << "Fizz"
+    else
+      fb_arr << num
+    end
   end
 
-  rev_word = rev_arr.join("")
+  fb_arr
 end
 
-def is_palindrome?(str)
-  str == reverse_word(str)
-end
-
-p reverse_word("racecar")
-p is_palindrome?("racecar")
+p fizzbuzz(1, 15)
