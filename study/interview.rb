@@ -1,19 +1,13 @@
-def balancer(str)
-  return false unless str.count("(") == str.count(")")
-
-  arr = str.split("")
-  paren_count = 0
-  arr.each do |char|
-    paren_count += 1 if char == "("
-    paren_count -= 1 if char == ")"
-    return false if paren_count < 0
+def is_prime?(number)
+  (2..(number - 1)).each do |divisor|
+    return false if number%divisor == 0
   end
 
   true
 end
 
-# p balancer("hi")
-# p balancer("(hi")
-# p balancer("(hi)")
+def find_primes(num1, num2)
+  (num1..num2).select { |n| is_prime?(n) }
+end
 
-p balancer(")hi(") #=> should return false
+p find_primes(3, 21)
