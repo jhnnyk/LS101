@@ -1,15 +1,13 @@
-def reverse_array(arr)
-  rev_arr = []
-  i = 0
-  loop do |str|
-    rev_arr[arr.size - 1 - i] = arr[i]
-    i += 1
-    break if i == arr.size
+def reverse_string(string)
+  string_arr = string.split("")
+  rev_string_arr = []
+
+  string.size.times do |letter|
+    rev_string_arr << string_arr.pop
   end
-  rev_arr
+  rev_string = rev_string_arr.join("")
+
+  rev_string
 end
 
-arr = ['one', 'two', 'three', 'four', 'five', 'six']
-
-p reverse_array(arr)
-
+p reverse_string("hello")
