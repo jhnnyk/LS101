@@ -1,17 +1,15 @@
-def reverse_string(word)
-  rev_word_arr = []
-  word_arr = word.split("")
-
-  word.size.times do
-    rev_word_arr << word_arr.pop
+def fizzbuzz(num1, num2)
+  (num1..num2).map do |n|
+    if n%15 == 0
+      "FizzBuzz"
+    elsif n%5 == 0
+      "Buzz"
+    elsif n%3 == 0
+      "Fizz"
+    else
+      n
+    end
   end
-
-  rev_word_arr.join("")
 end
 
-def is_palindrome?(str)
-  reverse_string(str).downcase == str.downcase
-end
-
-p is_palindrome?("hello")
-p is_palindrome?("Racecar")
+p fizzbuzz(1, 15)

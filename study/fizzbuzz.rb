@@ -1,19 +1,15 @@
 def fizzbuzz(num1, num2)
-  fizzbuzz = []
-
-  (num1..num2).each do |n|
+  (num1..num2).map do |n|
     if n%15 == 0
-      fizzbuzz << "FizzBuzz"
+      "FizzBuzz"
     elsif n%5 == 0
-      fizzbuzz << "Buzz"
+      "Buzz"
     elsif n%3 == 0
-      fizzbuzz << "Fizz"
+      "Fizz"
     else
-      fizzbuzz << n
+      n
     end
   end
-
-  fizzbuzz
 end
 
 p fizzbuzz(1, 15)
