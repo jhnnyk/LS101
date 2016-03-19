@@ -4,17 +4,14 @@
 # find_primes(3, 10) #=> 3, 5, 7
 def is_prime?(num)
   (2..(num-1)).each do |divisor|
-    if num%divisor == 0
-      return false
-    end
+    return false if num%divisor == 0
   end
+
   true
 end
 
 def find_primes(num1, num2)
-  (num1..num2).select do |number|
-    is_prime?(number)
-  end
+  (num1..num2).select { |n| is_prime?(n) }
 end
 
-p find_primes(3, 10)
+p find_primes(3, 21)
