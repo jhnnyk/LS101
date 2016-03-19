@@ -1,13 +1,16 @@
-def is_prime?(number)
-  (2..(number - 1)).each do |divisor|
-    return false if number%divisor == 0
+def reverse_arr(arr)
+  rev_arr = []
+
+  i = 0
+  loop do
+    rev_arr[arr.size - 1 - i] = arr[i]
+    i += 1
+    break if i == arr.size
   end
 
-  true
+  rev_arr
 end
 
-def find_primes(num1, num2)
-  (num1..num2).select { |n| is_prime?(n) }
-end
+arr = ['zero', 'one', 'two', 'three', 'four', 'five', 'six']
 
-p find_primes(3, 21)
+p reverse_arr(arr)
