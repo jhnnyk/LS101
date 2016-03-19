@@ -30,17 +30,16 @@ query2 = {
 
 def search(query)
   # implementation goes here
-  results = PRODUCTS.select do |product|
+  PRODUCTS.select do |product|
     product[:price] >= query[:price_min] &&
     product[:price] <= query[:price_max] &&
     product[:name].downcase.include?(query[:q])
   end
-  p results
 end
 
-search(query)
+p search(query)
 # [ { name: "Thinkpad x220", price: 250 } ]
 
-search(query2)
+p search(query2)
 # [{ name: "Dell Inspiron", price: 300 },
 #  { name: "Dell Inspiron", price: 450 }]
