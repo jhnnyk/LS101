@@ -1,15 +1,15 @@
-def fizzbuzz(num1, num2)
-  (num1..num2).map do |n|
-    if n%15 == 0
-      "FizzBuzz"
-    elsif n%5 == 0
-      "Buzz"
-    elsif n%3 == 0
-      "Fizz"
-    else
-      n
-    end
-  end
+VOWELS = ['a', 'e', 'i', 'o', 'u']
+
+def remove_vowels(str)
+  word_arr = str.split("")
+  VOWELS.each { |v| word_arr.delete(v) }
+  word_arr.join("")
 end
 
-p fizzbuzz(1, 15)
+def remove_vowels_arr(arr)
+  arr.map { |str| remove_vowels(str) }
+end
+
+arr = ['green', 'yellow', 'black', 'white']
+
+p remove_vowels_arr(arr)
