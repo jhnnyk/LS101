@@ -1,15 +1,18 @@
-VOWELS = ['a', 'e', 'i', 'o', 'u']
+def balancer(str)
+  return false unless str.count("(") == str.count(")")
 
-def remove_vowels(str)
-  word_arr = str.split("")
-  VOWELS.each { |v| word_arr.delete(v) }
-  word_arr.join("")
+  paren_count = 0
+  str_arr = str.split("")
+  str_arr.each do |letter|
+    paren_count += 1 if letter == "("
+    paren_count -= 1 if letter == ")"
+    return false if paren_count < 0
+  end
+
+  true
 end
 
-def remove_vowels_arr(arr)
-  arr.map { |str| remove_vowels(str) }
-end
-
-arr = ['green', 'yellow', 'black', 'white']
-
-p remove_vowels_arr(arr)
+p balancer("hi")    # => true
+p balancer("(hi")   # => false
+p balancer("(hi)")  # => true
+p balancer(")hi(")  # => false
