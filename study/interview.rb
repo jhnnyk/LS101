@@ -1,16 +1,24 @@
-def reverse_array(arr)
-  rev_arr = []
+def fibonacci_numbers(arr_size)
+  fib_nums = [0, 1]
 
-  i = 0
   loop do
-    rev_arr[i] = arr[arr.size - 1 - i]
-    i += 1
-    break if i == arr.size
+    fib_nums[fib_nums.size] = fib_nums[fib_nums.size - 1] + fib_nums[fib_nums.size - 2]
+    break if fib_nums.size == arr_size
   end
 
-  rev_arr
+  fib_nums
+end
+
+def fib_index(arr)
+  new_arr = []
+
+  arr.each_with_index do |item, index|
+    new_arr << item if fibonacci_numbers(arr.size).include?(index)
+  end
+
+  new_arr
 end
 
 arr = ['zero', 'one', 'two', 'three', 'four', 'five']
 
-p reverse_array(arr)
+p fib_index(arr)
