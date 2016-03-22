@@ -57,13 +57,21 @@
 # -------------------
 # method args
 
-def run(str)
-  str << ' world'
+# def run(str)
+#   str << ' world'
+# end
+
+
+# a = 'hello'
+# run(a)
+
+# puts a
+
+
+# --------------------
+
+5.times do |i|
+  p i
+  break if i == 5
 end
-
-
-a = 'hello'
-run(a)
-
-puts a
 
