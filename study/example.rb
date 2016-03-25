@@ -1,3 +1,4 @@
+require 'pry'
 # -------------------
 # select returns a new array based on the block's *return value*.
 # If the return value evaluates to true (truthiness),
@@ -70,8 +71,54 @@
 
 # --------------------
 
-5.times do |i|
-  p i
-  break if i == 5
+# 5.times do |i|
+#   p i
+#   break if i == 5
+# end
+
+
+# --------------------
+# if n > 40
+#   how many 4o's?
+#   how much is left?
+# elsif n > 20
+#   add the 20 price
+#   subtract off 20
+#   how much is left?
+# ...
+
+def cheapest_quote(n)
+  cost = {forty: 3.85, twenty: 1.93, ten: 0.97, five: 0.49, one: 0.1}
+  fortys = 0
+  twentys = 0
+  tens = 0
+  fives = 0
+  ones = 0
+  
+  loop do
+    if n >= 40
+      fortys = (n / 40).to_i
+      n = n - (fortys * 40)
+    elsif n >= 20
+      twentys = 1
+      n = n - 20
+    elsif n >= 10
+      tens = 1
+      n = n - 10
+    elsif n >= 5
+      fives = 1
+      n = n - 5
+    elsif n < 5
+      ones = n
+      break
+    end
+  end
+  
+  price = (cost[:forty] * fortys) + (cost[:twenty] * twentys) +
+          (cost[:ten] * tens) + (cost[:five] * fives) + (cost[:one] * ones)
 end
+
+p cheapest_quote(80)
+
+
 
