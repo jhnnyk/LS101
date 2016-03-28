@@ -34,13 +34,29 @@
 # ------------------
 # Remove the time
 # http://www.codewars.com/kata/56b0ff16d4aa33e5bb00008e/train
-def shorten_to_date(long_date)
-  # long_date[0..(long_date.index(",") - 1)]
-  long_date.split(",").first
+# def shorten_to_date(long_date)
+#   # long_date[0..(long_date.index(",") - 1)]
+#   long_date.split(",").first
+# end
+
+# p shorten_to_date("Monday February 2, 8pm") # => "Monday February 2"
+# p shorten_to_date("Tuesday May 29, 8pm") # => "Tuesday May 29"
+# p shorten_to_date("Wed September 1, 3am") # => "Wed September 1"
+# p shorten_to_date("Friday May 2, 9am") # => "Friday May 2"
+# p shorten_to_date("Tuesday January 29, 10pm") # => "Tuesday January 29"
+
+
+# -------------------
+# My head is at the wrong end!
+# http://www.codewars.com/kata/56f699cd9400f5b7d8000b55/train/ruby
+def fix_the_meerkat(arr)
+  #your code here
 end
 
-p shorten_to_date("Monday February 2, 8pm") # => "Monday February 2"
-p shorten_to_date("Tuesday May 29, 8pm") # => "Tuesday May 29"
-p shorten_to_date("Wed September 1, 3am") # => "Wed September 1"
-p shorten_to_date("Friday May 2, 9am") # => "Friday May 2"
-p shorten_to_date("Tuesday January 29, 10pm") # => "Tuesday January 29"
+fix_the_meerkat(["tail", "body", "head"]) # => ["head", "body", "tail"]
+fix_the_meerkat(["tails", "body", "heads"]) # => ["heads", "body", "tails"]
+fix_the_meerkat(["bottom", "middle", "top"]) # => ["top", "middle", "bottom"]
+fix_the_meerkat(["lower legs", "torso", "upper legs"]) # => ["upper legs", "torso", "lower legs"]
+fix_the_meerkat(["ground", "rainbow", "sky"]) # => ["sky", "rainbow", "ground"]
+
+
