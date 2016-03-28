@@ -64,13 +64,31 @@ require 'pry'
 # ---------------------
 # Is this my tail?
 # http://www.codewars.com/kata/56f695399400f5d9ef000af5/train/ruby
-def correct_tail(body, tail)
-  body.chars.last == tail
+# def correct_tail(body, tail)
+#   body.chars.last == tail
+# end
+
+# p correct_tail("Fox", "x") # => true
+# p correct_tail("Rhino", "o") # => true
+# p correct_tail("Meerkat", "t") # => true
+# p correct_tail("Emu", "t") # => false
+# p correct_tail("Badger", "s") # => false
+# p correct_tail("Giraffe", "d") # => false
+
+
+# ----------------------
+# Transportation on vacation
+# http://www.codewars.com/kata/568d0dd208ee69389d000016/train/ruby
+def rental_car_cost(d)
+  if d >= 7
+    (d * 40) - 50
+  elsif d >= 3
+    (d * 40) - 20
+  else
+    d * 40
+  end
 end
 
-p correct_tail("Fox", "x") # => true
-p correct_tail("Rhino", "o") # => true
-p correct_tail("Meerkat", "t") # => true
-p correct_tail("Emu", "t") # => false
-p correct_tail("Badger", "s") # => false
-p correct_tail("Giraffe", "d") # => false
+p rental_car_cost(1) # => 40
+p rental_car_cost(2) # => 80
+p rental_car_cost(3) # => 100
