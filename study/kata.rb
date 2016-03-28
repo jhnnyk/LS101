@@ -79,16 +79,53 @@ require 'pry'
 # ----------------------
 # Transportation on vacation
 # http://www.codewars.com/kata/568d0dd208ee69389d000016/train/ruby
-def rental_car_cost(d)
-  if d >= 7
-    (d * 40) - 50
-  elsif d >= 3
-    (d * 40) - 20
-  else
-    d * 40
+# def rental_car_cost(d)
+#   if d >= 7
+#     (d * 40) - 50
+#   elsif d >= 3
+#     (d * 40) - 20
+#   else
+#     d * 40
+#   end
+# end
+
+# p rental_car_cost(1) # => 40
+# p rental_car_cost(2) # => 80
+# p rental_car_cost(3) # => 100
+
+
+# -----------------------
+# Get the Middle Character
+# http://www.codewars.com/kata/56747fd5cb988479af000028/train/ruby
+# def get_middle(s)
+#   if s.length.odd?
+#     s[(s.length / 2).to_i]
+#   else
+#     s[(s.length / 2) - 1] + s[(s.length / 2)]
+#   end
+# end
+
+# p get_middle("test") # => "es"
+# p get_middle("testing") # => "t"
+# p get_middle("middle") # => "dd"
+# p get_middle("A") # => "A"
+# p get_middle("of") # => "of"
+
+
+# -----------------------
+# Number of people in the bus
+# http://www.codewars.com/kata/5648b12ce68d9daa6b000099/train/ruby
+def number(bus_stops)
+  count = 0
+
+  bus_stops.each do |people|
+    count = count + people[0] - people[1]
   end
+
+  count
 end
 
-p rental_car_cost(1) # => 40
-p rental_car_cost(2) # => 80
-p rental_car_cost(3) # => 100
+p number([[10, 0], [3, 5], [5, 8]]) # => 5
+p number([[3, 0], [9, 1], [4, 10], [12, 2], [6, 1], [7, 10]]) # => 17
+p number([[3, 0], [9, 1], [4, 8], [12, 2], [6, 1], [7, 8]]) # => 21
+
