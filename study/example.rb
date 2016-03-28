@@ -87,38 +87,91 @@ require 'pry'
 #   how much is left?
 # ...
 
-def cheapest_quote(n)
-  cost = {forty: 3.85, twenty: 1.93, ten: 0.97, five: 0.49, one: 0.1}
-  fortys = 0
-  twentys = 0
-  tens = 0
-  fives = 0
-  ones = 0
+# def cheapest_quote(n)
+#   cost = {forty: 3.85, twenty: 1.93, ten: 0.97, five: 0.49, one: 0.1}
+#   fortys = 0
+#   twentys = 0
+#   tens = 0
+#   fives = 0
+#   ones = 0
   
-  loop do
-    if n >= 40
-      fortys = (n / 40).to_i
-      n = n - (fortys * 40)
-    elsif n >= 20
-      twentys = 1
-      n = n - 20
-    elsif n >= 10
-      tens = 1
-      n = n - 10
-    elsif n >= 5
-      fives = 1
-      n = n - 5
-    elsif n < 5
-      ones = n
-      break
+#   loop do
+#     if n >= 40
+#       fortys = (n / 40).to_i
+#       n = n - (fortys * 40)
+#     elsif n >= 20
+#       twentys = 1
+#       n = n - 20
+#     elsif n >= 10
+#       tens = 1
+#       n = n - 10
+#     elsif n >= 5
+#       fives = 1
+#       n = n - 5
+#     elsif n < 5
+#       ones = n
+#       break
+#     end
+#   end
+  
+#   price = (cost[:forty] * fortys) + (cost[:twenty] * twentys) +
+#           (cost[:ten] * tens) + (cost[:five] * fives) + (cost[:one] * ones)
+# end
+
+# p cheapest_quote(80)
+
+
+# ----------------
+# def longest_palindrome(s)
+#   i = 0
+#   loop do
+#     p s[i..(s.size - 1)]
+#     i += 1
+#     break if i == s.size
+#   end
+# end
+
+# longest_palindrome("a")
+# longest_palindrome("aa")
+# longest_palindrome("baa")
+# longest_palindrome("aab")
+# longest_palindrome("baabcd")
+# longest_palindrome("baablkj12345432133d")
+
+
+def num_duplicates(message)
+  # track my duplicates in an array
+  duplicates = []
+  # track all of the words we've looped over
+  words = []
+  # split on spaces and loop over each word
+  message.split(" ").each do | word | 
+    # set each word to lower case and only accept
+    # characters in the alphabet and hyphens
+    word = word.downcase.match("[a-zA-Z-]*")
+    # is this a dulpicate?
+    isDuplicate = words.include?(word)
+    # have we found this duplicate already?
+    alreadyFound = duplicates.include?(word)
+    
+    if(isDuplicate and !alreadyFound) 
+      # new duplicate found
+      duplicates << word
     end
+    # record our translated word
+    words << word
+    binding.pry
   end
-  
-  price = (cost[:forty] * fortys) + (cost[:twenty] * twentys) +
-          (cost[:ten] * tens) + (cost[:five] * fives) + (cost[:one] * ones)
+  # return the size of our duplicates
+  p duplicates
+  duplicates.size
 end
 
-p cheapest_quote(80)
+# str = 'Learning is a fun challenge. Fun is what keeps me interested!'
+# p num_duplicates(str)
+
+str = 'Kata make the brain grow strong. The brain like kata.'
+p num_duplicates(str)
 
 
 
