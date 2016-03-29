@@ -193,23 +193,48 @@ require 'pry'
 # --------------------
 # Cyclops numbers
 # http://www.codewars.com/kata/56b0bc0826814364a800005a/train/ruby
-def cyclops?(n)
-  binary = n.to_s(2)
+# def cyclops?(n)
+#   binary = n.to_s(2)
 
-  if binary.size.odd?
-    (binary[binary.size / 2] == "0") && (binary.count("0") == 1)
-  else
-    return false
+#   if binary.size.odd?
+#     (binary[binary.size / 2] == "0") && (binary.count("0") == 1)
+#   else
+#     return false
+#   end
+# end
+
+# p cyclops?(1) # => false
+# p cyclops?(5) # => true
+# p cyclops?(3) # => false
+# p cyclops?(13) # => false
+# p cyclops?(27) # => true
+# p cyclops?(2015) # => true
+# p cyclops?(666) # => false
+# p cyclops?(42) # => false
+
+
+# ----------------------
+# How far will I go?
+# http://www.codewars.com/kata/56d46b8fda159582e100001b/train/ruby
+def travel(total_time, run_time, rest_time, speed)
+  distance = 0
+
+  loop do
+    if total_time < run_time
+      distance = distance + total_time * speed
+    else
+      distance = distance + (run_time * speed)
+    end
+
+    total_time = total_time - run_time - rest_time
+    break if total_time <= 0
   end
+
+  distance
 end
 
-p cyclops?(1) # => false
-p cyclops?(5) # => true
-p cyclops?(3) # => false
-p cyclops?(13) # => false
-p cyclops?(27) # => true
-p cyclops?(2015) # => true
-p cyclops?(666) # => false
-p cyclops?(42) # => false
-
+p travel(1000, 10, 127, 14) # => 1120
+p travel(1000, 10, 0, 10) # => 10000
+p travel(25, 50, 120, 18) # => 450
+p travel(35869784, 90, 100, 5) # => 84954920
 
