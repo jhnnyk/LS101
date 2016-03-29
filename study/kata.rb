@@ -115,17 +115,78 @@ require 'pry'
 # -----------------------
 # Number of people in the bus
 # http://www.codewars.com/kata/5648b12ce68d9daa6b000099/train/ruby
-def number(bus_stops)
-  count = 0
+# def number(bus_stops)
+#   count = 0
 
-  bus_stops.each do |people|
-    count = count + people[0] - people[1]
+#   bus_stops.each do |people|
+#     count = count + people[0] - people[1]
+#   end
+
+#   count
+# end
+
+# p number([[10, 0], [3, 5], [5, 8]]) # => 5
+# p number([[3, 0], [9, 1], [4, 10], [12, 2], [6, 1], [7, 10]]) # => 17
+# p number([[3, 0], [9, 1], [4, 8], [12, 2], [6, 1], [7, 8]]) # => 21
+
+
+# -----------------------
+# Grasshopper - Debug
+# http://www.codewars.com/kata/55cb854deb36f11f130000e1/train/ruby
+# def weather_info(temp)
+#   c = convert_to_celsius(temp)
+#   if (c < 0)
+#     return ("#{c} is freezing temperature")
+#   else
+#     return ("#{c} is above freezing temperature")
+#   end
+# end
+
+# def convert_to_celsius(temperature)
+#   celsius = (temperature - 32) * 5 / 9
+# end
+
+# p weather_info(50)
+# p weather_info(23)
+
+
+# ---------------------
+# Decoding a message
+# http://www.codewars.com/kata/565b9d6f8139573819000056/train/ruby
+# def decipher(word)
+#   alpha = ('a'..'z').to_a
+#   decoded_message = []
+
+#   word.chars.map do |letter|
+#     decoded_message << alpha.reverse[alpha.index(letter)]
+#   end
+
+#   decoded_message.join
+# end
+
+# def decode(message)
+#   words = message.split(" ")
+#   decoded = words.map { |word| decipher(word) }.join(" ")
+# end
+# the above works, but not with edge cases with spaces at the front and back
+# ---------
+def decode(message)
+  alpha = ('a'..'z').to_a
+
+  decoded = message.chars.map do |char|
+    if char == " "
+      " "
+    else
+      char = alpha.reverse[alpha.index(char)]
+    end
   end
 
-  count
+  decoded.join
 end
 
-p number([[10, 0], [3, 5], [5, 8]]) # => 5
-p number([[3, 0], [9, 1], [4, 10], [12, 2], [6, 1], [7, 10]]) # => 17
-p number([[3, 0], [9, 1], [4, 8], [12, 2], [6, 1], [7, 8]]) # => 21
+p decode(" ") # => " "
+p decode("svool") # => "hello"
+p decode("r slkv mlylwb wvxlwvh gsrh nvhhztv") # => "i hope nobody decodes this message"
+p decode("  r slkv mlylwb wvxlwvh gsrh nvhhztv ") # => "  i hope nobody decodes this message "
+
 
