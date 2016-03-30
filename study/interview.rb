@@ -1,26 +1,13 @@
-def fibonacci_numbers(n)
-  fib = [0, 1]
+def is_palindrome?(word)
+  word_arr = word.chars
+  rev_word_arr = []
 
-  loop do
-    fib[fib.size] = fib[fib.size - 1] + fib[fib.size - 2]
-    break if fib.size == n
+  word.size.times do
+    rev_word_arr << word_arr.pop
   end
 
-  fib
+  word == rev_word_arr.join
 end
 
-def has_fib_index(arr)
-  fib_arr = []
-
-  arr.each_with_index do |item, index|
-    if fibonacci_numbers(arr.size).include?(index)
-      fib_arr << item
-    end
-  end
-
-  fib_arr
-end
-
-arr = ['zero', 'one', 'two', 'three', 'four', 'five']
-
-p has_fib_index(arr)
+p is_palindrome?("hello")
+p is_palindrome?("racecar")
