@@ -1,9 +1,15 @@
-def is_prime?(num)
-  (2..(num - 1)).each do |divisor|
-    return false if num % divisor == 0
+def reverse_array(arr)
+  rev_arr = []
+
+  i = 0
+  arr.size.times do
+    rev_arr << arr[arr.size - 1 - i]
+    i += 1
   end
 
-  true
+  rev_arr
 end
 
-p is_prime?(8)
+arr = ['zero', 'one', 'two', 'three', 'four', 'five']
+
+p reverse_array(arr)
